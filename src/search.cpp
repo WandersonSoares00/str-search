@@ -5,7 +5,7 @@ void brute_force_search(const char *pat, const char *txt, int *occur){
 
     int m = strlen(pat);
     int k = 0;
-    for (int i = 0; txt[i+m]; ++i ){
+    for (int i = 0; txt[i + m - 1]; ++i ){
         int j = 0;
         while (pat[j] && txt[i+j] == pat[j]){
             ++j;
@@ -16,6 +16,7 @@ void brute_force_search(const char *pat, const char *txt, int *occur){
 
     occur[k] = -1;
 }
+
 
 /*int *LPS_array(const char *pat, int m){     //longest prefix that is also a suffix of txt
     int *lps = new int[m];
