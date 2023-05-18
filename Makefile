@@ -1,6 +1,6 @@
 PROJ_NAME = main
 CXX = g++
-CPPFLAGS = -Wall -Wextra -std=c++17 -pedantic
+CPPFLAGS = -Wall -Wextra -std=c++17 -g -pedantic
 RM = rm -rf
 OBJ_DIR = bin
 RM = rm -rf

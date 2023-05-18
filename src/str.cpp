@@ -1,5 +1,5 @@
 #include "str.hpp"
-#include <cstring>
+#include <ostream>
 
 int Int_Random_gerator :: generate(int min, int max){
     static std::random_device rd; // Dispositivo de hardware para geração de números aleatórios
@@ -10,7 +10,7 @@ int Int_Random_gerator :: generate(int min, int max){
 
 Str :: Str(const char *str, int size){
     strConst = str;
-    this -> size = size;
+    this -> size = size;    //size = strlen(str)
     dinamic = false;
 }
 
@@ -28,8 +28,9 @@ Str :: ~Str(){
 
 void Str :: randomize(char begin = 'a', char end = 'z'){
     if (!dinamic)   return;
-    for(int i = 0; i < size ; ++i)
+    for(int i = 0; i < size ; ++i){
         str[i] = Int_Random_gerator::generate(begin, end);
+    }
 }
 
 void Str :: setStr(const char *str){
@@ -54,5 +55,12 @@ bool Str :: isDinamic(){
 
 int Str :: getSize(){
     return size;
+}
+
+std::ostream& operator <<(std::ostream &out, Str s){
+    char *st = s.getStr();
+    while (*st)
+        out << *st++;
+    return out;
 }
 

@@ -1,16 +1,18 @@
 #include "search_time.hpp"
 #include <iostream>
 #include <chrono>
-#include <type_traits>
+
 #include "search.hpp"
 
 SearchTime :: SearchTime(int n, int m) : txt(n), pattern(m) {
-    occurr_brt = new int[ n / m + 1];
-    occurr_kmp = new int[ n / m + 1];
+    if (m > n)
+        throw std::invalid_argument("Padrão maior que o texto");
+    occurr_brt = new int[ n + 1];
+    occurr_kmp = new int[ n + 1];
     time_brt = time_kmp = 0.0f;
 }
 
-SearchTime :: SearchTime(const char *text) : txt(text), pattern(nullptr) {
+SearchTime :: SearchTime(const char *text) : txt(text), pattern(nullptr, -1) {
     occurr_brt = new int[ txt.getSize() + 1];
     occurr_kmp = new int[ txt.getSize() + 1];
     time_brt = time_kmp = 0.0f;
@@ -56,13 +58,17 @@ double SearchTime :: time( int *occurr, void (*search)(const char *, const char 
     std::chrono::time_point<std::chrono::steady_clock> start, end;
 
     if (txt.isDinamic()){
+        char *pat = pattern.getStr();
+        char *t = txt.getStr();
         start = std::chrono::steady_clock::now();
-        search(pattern.getStr(), txt.getStr(), occurr);
+        search(pat, t, occurr);
         end = std::chrono::steady_clock::now();
     }
     else{
+        const char *pat = pattern.getStrConst();
+        const char *t = txt.getStrConst();
         start = std::chrono::steady_clock::now();
-        search(pattern.getStrConst(), txt.getStrConst(), occurr);
+        search(pat, t, occurr);
         end = std::chrono::steady_clock::now();
     }
     

@@ -31,5 +31,4 @@ class Str{
     int getSize();
 };
 
-
 #endif

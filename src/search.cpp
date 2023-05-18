@@ -1,5 +1,6 @@
 #include <cstring>
 #include "search.hpp"
+#include <iostream>
 
 void brute_force_search(const char *pat, const char *txt, int *occur){
 
@@ -10,8 +11,9 @@ void brute_force_search(const char *pat, const char *txt, int *occur){
         while (pat[j] && txt[i+j] == pat[j]){
             ++j;
         }
-        if (j == m)
+        if (j == m){
             occur[k++] = i;
+        }
     }
 
     occur[k] = -1;
@@ -36,7 +38,7 @@ int *LPS_array(const char *pat, int m){     //longest prefix that is also a suff
 
 void KMP_search(const char *pat, const char *txt, int *occur){
     int m = strlen(pat);
-    int *lps = LPS_array(pat, m); // lps[0..m-1], ∀ i ∈ [0 .. m-1], lps[i] = {-1, 0, 1, ... i-1}
+    int *lps = LPS_array(pat, m);
     int i = 0, j = 0, k = 0;
 
     while(txt[i]){
@@ -52,7 +54,7 @@ void KMP_search(const char *pat, const char *txt, int *occur){
             j = lps[j - 1] + 1;
         }
     }
-
+    
     occur[k] = -1;
 
     delete[] lps;
