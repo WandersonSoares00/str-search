@@ -31,9 +31,9 @@ The program generetes instances for search and runs them for each algorithm. Fol
     Here's an example:
     run `./main A d 5 500 3` <br>
     This command will display the search time results for 3 randomly generated texts and patterns, each with a size of 500 characters and a pattern size of 5 characters. The character range for both text and pattern generation will be from 'a' to 'd'.
-    <br>
-    Another format is: <br>
-    *./main R [x] [y]*
+    <br><br>
+    Another format is: <br><br>
+    *./main R [x] [y]* <br>
     Where [x] indicates the start range of the patterns to be searched in the real instance found in [src/real_instances.hpp](src/real_instances.hpp) and [y] is the end range. Note that 0 <= x <= y <= 35129.
 ## Licence information
 This project is licensed under the GNU General Public License v3.0.
